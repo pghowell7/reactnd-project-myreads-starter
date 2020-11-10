@@ -56,39 +56,52 @@ class Book extends React.Component {
   
     render() {
 
-    const {book,booksUpdateShelf} = this.props
+    const {book, shelf} = this.props
 
     let currentShelf 
 
-    if (book.shelf) {
+    if (shelf !== "undefined" && shelf) {
+      currentShelf = shelf
+    }
+    else if (book.shelf !== "undefined" && book.shelf) {
       currentShelf = book.shelf
     } else {
       currentShelf ="none"
 
     }
 
-
-      return (
+    return  (        
         <div className="book">
-        <div className="book-top">
-          <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: 'url(' + book.imageLinks.thumbnail + ')' }}></div>
-          <div className="book-shelf-changer">
-            <select
-              value={currentShelf}
-              onChange={this.shelfChanged}
-              
-            >
-              <option value="move" disabled>Move to...</option>
-              <option value="currentlyReading" >Currently Reading</option>
-              <option value="wantToRead">Want to Read</option>
-              <option value="read">Read</option>
-              <option value="none">None</option>
-            </select>
-          </div>
-        </div>
-      <div className="book-title">{book.title}</div>
-      <div className="book-authors">{book.authors}</div>
-      </div>          
+          {book !=="undefined" ? (
+            <div>
+              <div className="book-top">
+                {book.imageLinks && book.imageLinks !== "undefined" && book.imageLinks.thumbnail !== "undefined" && book.imageLinks.thumbnail.length>0 ? (
+                  <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: 'url(' + book.imageLinks.thumbnail + ')' }}></div>
+                ):(<div></div>)}
+                <div className="book-shelf-changer">
+                  <select
+                    value={currentShelf}
+                    onChange={this.shelfChanged}              
+                  >
+                    <option value="move" disabled>Move to...</option>
+                    <option value="currentlyReading" >Currently Reading</option>
+                    <option value="wantToRead">Want to Read</option>
+                    <option value="read">Read</option>
+                    <option value="none">None</option>
+                  </select>
+                </div>
+              </div>
+              <div className="book-title">{book.title}</div>
+              {book.authors && book.authors !== "undefined" && !(book.authors) ? (
+                <div>
+                  {book.authors.map((author, index) => (
+                    <div key={index} className="book-authors">{author}</div>
+                  ))}
+                </div>
+              ):(<div></div>)}            
+            </div>
+            ):(<div></div>)}
+          </div>                 
         )
     }
 }

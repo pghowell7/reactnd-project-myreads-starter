@@ -39,6 +39,7 @@ class BookShelf extends React.Component {
                           <li key={index}>
                             <Book 
                               book = {book}
+                              shelf = {book.shelf}
                               booksUpdateShelf={booksUpdateShelf}
                             />
                           </li>
