@@ -12,19 +12,10 @@ class BookShelf extends React.Component {
        */
       filteredBooks: []
     }
-  
-    /*booksOnShelf = (bookShelfName) => {
-      this.setState((currentState) => ({
-        filteredBooks: this.books.filter((b) => {
-          return b.shelf === bookShelfName
-        })
-      }))
-    }*/
 
     render() {
 
         const {books, bookshelfname,bookshelftitle,booksUpdateShelf} = this.props
-        //const filteredBooks = this.booksOnShelf(bookshelfname)
         const filteredBooks = books.filter((b) => {
           return b.shelf === bookshelfname
         })
